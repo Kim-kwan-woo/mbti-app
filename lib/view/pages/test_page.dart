@@ -1,17 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:testapp/pages/result_page.dart';
-import 'package:testapp/util/app_color.dart';
+import 'package:testapp/view/pages/result_page.dart';
 import 'package:testapp/util/data_source.dart';
+import 'package:testapp/view/widgets/option_card.dart';
+import 'package:testapp/view/widgets/test_progress_bar.dart';
 
-class TestPage extends StatelessWidget {
-  TestPage({super.key});
+class TestPage extends StatefulWidget {
+  const TestPage({super.key});
+
+  @override
+  State<TestPage> createState() => _TestPageState();
+}
+
+class _TestPageState extends State<TestPage> {
   final pageController = PageController();
+
   int currentPage = 0;
+
   List<int> result = [0, 0, 0, 0];
+
+  int questionIdx = 1;
 
   //answer가 두 가지 답변 중 위쪽 답변이면 1 아래쪽 답변이면 0
   onTapAnswer(int questionNum, int answer, BuildContext context) {
+    questionIdx++;
+
     switch (questionNum % 7) {
       case 1:
         result[0] += answer;
@@ -33,6 +46,8 @@ class TestPage extends StatelessWidget {
       currentPage += 1;
       pageController.jumpToPage(currentPage);
     }
+
+    setState(() {});
   }
 
   getMbti() {
@@ -73,30 +88,13 @@ class TestPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
           child: Column(
             children: [
-              Stack(
-                children: [
-                  Container(
-                    height: 10,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: AppColor.grayscale,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  Container(
-                    height: 10,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      color: AppColor.primary,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                ],
+              TestProgressBar(
+                questionIdx: questionIdx,
               ),
               const SizedBox(height: 20),
-              const Text(
-                style: TextStyle(fontSize: 16),
-                '4 / 70',
+              Text(
+                style: const TextStyle(fontSize: 16),
+                '${questionIdx.toString()} / 70',
               ),
               Expanded(
                 child: PageView(
@@ -128,56 +126,16 @@ class TestPage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              InkWell(
+                              OptionCard(
                                 onTap: () =>
                                     onTapAnswer(e['index'], 1, context),
-                                child: Container(
-                                  width: double.infinity,
-                                  alignment: Alignment.center,
-                                  padding: const EdgeInsets.all(20),
-                                  decoration: BoxDecoration(
-                                    color: AppColor.subColor,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    border: Border.all(
-                                      width: 6,
-                                      color: AppColor.primary,
-                                    ),
-                                  ),
-                                  child: Text(
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                    e['options'].first.toString(),
-                                  ),
-                                ),
+                                optionText: e['options'].first.toString(),
                               ),
                               const SizedBox(height: 15),
-                              InkWell(
+                              OptionCard(
                                 onTap: () =>
                                     onTapAnswer(e['index'], 0, context),
-                                child: Container(
-                                  width: double.infinity,
-                                  alignment: Alignment.center,
-                                  padding: const EdgeInsets.all(20),
-                                  decoration: BoxDecoration(
-                                    color: AppColor.subColor,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    border: Border.all(
-                                      width: 6,
-                                      color: AppColor.primary,
-                                    ),
-                                  ),
-                                  child: Text(
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                    e['options'].last.toString(),
-                                  ),
-                                ),
+                                optionText: e['options'].last.toString(),
                               ),
                             ],
                           ),

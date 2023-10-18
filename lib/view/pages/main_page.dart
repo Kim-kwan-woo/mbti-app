@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:testapp/pages/test_page.dart';
+import 'package:testapp/view/pages/test_page.dart';
 import 'package:testapp/util/app_color.dart';
+import 'package:testapp/view/widgets/main_elevated_button.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -20,6 +21,7 @@ class _HomeScreenState extends State<MainPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Expanded(child: SizedBox()),
             SvgPicture.asset(
               'assets/images/avatar.svg',
             ),
@@ -51,24 +53,12 @@ class _HomeScreenState extends State<MainPage> {
             SizedBox(
               height: 50,
               width: double.infinity,
-              child: ElevatedButton(
+              child: MainElevatedButton(
+                childText: '시작하기',
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => TestPage(),
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColor.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: const Text(
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  '시작하기',
                 ),
               ),
             ),
