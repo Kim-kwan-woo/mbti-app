@@ -6,9 +6,9 @@ part 'question.g.dart';
 @freezed
 class Question with _$Question {
   factory Question({
-    required int index,
-    required String question,
-    required List<String> options,
+    required int index, //질문 번호
+    required String question, //질문 내용
+    required List<String> options, //선택지
   }) = _Question;
 
   factory Question.fromJson(Map<String, dynamic> json) =>

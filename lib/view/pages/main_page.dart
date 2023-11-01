@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:testapp/view/pages/test_page.dart';
+import 'package:go_router/go_router.dart';
+import 'package:testapp/util/app_router.dart';
 import 'package:testapp/util/app_color.dart';
 import 'package:testapp/view/widgets/main_elevated_button.dart';
 
-class MainPage extends StatefulWidget {
+class MainPage extends ConsumerWidget {
   const MainPage({super.key});
+  static const route = '/';
 
   @override
-  State<MainPage> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<MainPage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -55,11 +53,16 @@ class _HomeScreenState extends State<MainPage> {
               width: double.infinity,
               child: MainElevatedButton(
                 childText: '시작하기',
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => TestPage(),
-                  ),
-                ),
+                onPressed: () => context.pushNamed(AppRouter.test),
+              ),
+            ),
+            const SizedBox(height: 8),
+            SizedBox(
+              height: 50,
+              width: double.infinity,
+              child: MainElevatedButton(
+                childText: 'MBTI 백과사전',
+                onPressed: () => context.pushNamed(AppRouter.mbti),
               ),
             ),
           ],
