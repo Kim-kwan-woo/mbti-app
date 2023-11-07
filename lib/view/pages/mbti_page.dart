@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:testapp/util/app_color.dart';
 import 'package:testapp/util/app_router.dart';
 import 'package:testapp/view/widgets/main_elevated_button.dart';
 import 'package:testapp/view/widgets/mbti_card.dart';
@@ -17,7 +16,7 @@ class MbtiPage extends ConsumerWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -39,6 +38,7 @@ class MbtiPage extends ConsumerWidget {
                   ),
                 ],
               ),
+              const SizedBox(height: 8),
               Expanded(
                 child: ListView.builder(
                   itemCount: mbtiViewModel.value?.length ?? 0,

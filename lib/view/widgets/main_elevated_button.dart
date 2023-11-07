@@ -5,8 +5,8 @@ class MainElevatedButton extends StatelessWidget {
   const MainElevatedButton(
       {super.key, required this.onPressed, required this.childText});
 
-  final VoidCallback onPressed;
-  final String childText;
+  final VoidCallback onPressed; //onPressed 이벤트
+  final String childText; //버튼 텍스트
 
   @override
   Widget build(BuildContext context) {

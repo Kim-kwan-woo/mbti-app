@@ -5,9 +5,11 @@ import 'package:testapp/util/app_router.dart';
 
 void main() {
   setupLocator(); //의존성 주입
-  runApp(const ProviderScope(
-    child: MyApp(),
-  ));
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

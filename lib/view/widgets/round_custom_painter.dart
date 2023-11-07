@@ -7,7 +7,7 @@ class RoundCustomPainter extends CustomPainter {
       ..color = Colors.white
       ..style = PaintingStyle.fill;
 
-    double curveHeight = 50.0; // 곡선 높이 조절
+    double curveHeight = 50.0; //곡선 높이 조절
     double width = size.width;
     double height = size.height;
 

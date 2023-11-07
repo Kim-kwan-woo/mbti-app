@@ -4,8 +4,8 @@ import 'package:testapp/util/app_color.dart';
 class OptionCard extends StatelessWidget {
   const OptionCard({super.key, required this.onTap, required this.optionText});
 
-  final VoidCallback onTap;
-  final String optionText;
+  final VoidCallback onTap; //onTap 이벤트
+  final String optionText; //옵션 내용
 
   @override
   Widget build(BuildContext context) {
